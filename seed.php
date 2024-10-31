@@ -42,7 +42,6 @@ for ($i = 0; $i < 10; $i++) {
         ':phone_number' => $phone_number,
     ]);
 
-    echo "Utilisateur ajouté : $username - $email\n";
 }
 
 //table adresses.
@@ -66,7 +65,6 @@ for ($i = 0; $i < 10; $i++) {
         ':country' => $country,
     ]);
 
-    echo "Adresse ajoutée pour l'utilisateur $user_id : $street - $city\n";
 }
 
 //table product.
@@ -89,7 +87,6 @@ for ($i = 0; $i < 10; $i++) {
         ':category' => $category,
     ]);
 
-    echo "Produit ajouté : $name - $price €\n";
 }
 
 //table cart.
@@ -103,7 +100,6 @@ for ($i = 0; $i < 10; $i++) {
         ':user_id' => $user_id,
     ]);
 
-    echo "Panier créé pour l'utilisateur $user_id\n";
 }
 
 //table cart_product.
@@ -123,7 +119,6 @@ for ($i = 0; $i < 10; $i++) {
         ':quantity' => $quantity,
     ]);
 
-    echo "Produit $product_id ajouté au panier $cart_id avec quantité $quantity\n";
 }
 
 //table Commands.
@@ -131,11 +126,11 @@ for ($i = 0; $i < 10; $i++) {
 for ($i = 0; $i < 10; $i++) {
     $user_id = $i + 1;
     $status = $faker->randomElement(['en cours', 'livré', 'annulé']);
-    $adress_id = $i + 1; 
+    $adress_id = $i + 1;
 
     //query added with data.
     //Each order is linked to an address and a user.
-    $stmt = $pdo->prepare("INSERT INTO Commands (user_id, status, adress_id) 
+    $stmt = $pdo->prepare("INSERT INTO Commands (user_id, status, adress_id)
                           VALUES (:user_id, :status, :adress_id)");
     $stmt->execute([
         ':user_id' => $user_id,
@@ -143,7 +138,6 @@ for ($i = 0; $i < 10; $i++) {
         ':adress_id' => $adress_id,
     ]);
 
-    echo "Commande créée pour l'utilisateur $user_id avec statut $status\n";
 }
 
 //table Commande_product.
@@ -162,7 +156,6 @@ for ($i = 0; $i < 10; $i++) {
         ':quantity' => $quantity,
     ]);
 
-    echo "Produit $product_id ajouté à la commande $command_id avec quantité $quantity\n";
 }
 
 //table invoice.
@@ -185,7 +178,6 @@ for ($i = 0; $i < 10; $i++) {
         ':delivered_date' => $delivered_date,
     ]);
 
-    echo "Facture créée pour la commande $command_id avec montant total $total_amount €\n";
 }
 
 
