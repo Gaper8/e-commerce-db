@@ -102,25 +102,6 @@ for ($i = 0; $i < 10; $i++) {
 
 }
 
-//table cart_product.
-//adding products to carts with random quantity.
-for ($i = 0; $i < 10; $i++) {
-    $cart_id = $i + 1;
-    $product_id = $faker->numberBetween(1, 10);
-    $quantity = $faker->numberBetween(1, 5);
-
-    //query added with data.
-    //Each product is linked to a cart.
-    $stmt = $pdo->prepare("INSERT INTO Cart_Product (cart_id, product_id, quantity) 
-                          VALUES (:cart_id, :product_id, :quantity)");
-    $stmt->execute([
-        ':cart_id' => $cart_id,
-        ':product_id' => $product_id,
-        ':quantity' => $quantity,
-    ]);
-
-}
-
 //table Commands.
 //Generation of orders with random status for each user.
 for ($i = 0; $i < 10; $i++) {
@@ -140,22 +121,24 @@ for ($i = 0; $i < 10; $i++) {
 
 }
 
-//table Commande_product.
-//manages the relationship between orders and the products ordered.
+//table cart_product.
+//adding products to carts with random quantity.
 for ($i = 0; $i < 10; $i++) {
-    $command_id = $i + 1;
+    $cart_id = $i + 1;
     $product_id = $faker->numberBetween(1, 10);
     $quantity = $faker->numberBetween(1, 5);
+    $command_id = $i + 1;
 
     //query added with data.
-    $stmt = $pdo->prepare("INSERT INTO Command_Product (command_id, product_id, quantity) 
-                          VALUES (:command_id, :product_id, :quantity)");
+    //Each product is linked to a cart.
+    $stmt = $pdo->prepare("INSERT INTO Cart_Product (cart_id, product_id, quantity, command_id) 
+                          VALUES (:cart_id, :product_id, :quantity, :command_id)");
     $stmt->execute([
-        ':command_id' => $command_id,
+        ':cart_id' => $cart_id,
         ':product_id' => $product_id,
         ':quantity' => $quantity,
+        ':command_id' => $command_id,
     ]);
-
 }
 
 //table invoice.
